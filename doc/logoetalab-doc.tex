@@ -1,0 +1,305 @@
+% !TeX TXS-program:compile = txs:///arara
+% arara: pdflatex: {shell: yes, synctex: no, interaction: batchmode}
+% arara: pdflatex: {shell: yes, synctex: no, interaction: batchmode} if found('log', '(undefined references|Please rerun|Rerun to get)')
+
+\documentclass[french,11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{DejaVuSerif}
+%\usepackage[scale=1.125]{inconsolata}
+\usepackage{amssymb}
+\usepackage{logoetalab}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{soul}
+\usepackage{codehigh}
+\usepackage{multicol}
+\usepackage{tabularray}
+\usepackage{fontawesome5}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+%\rhead{\sffamily\small\affloetalab[Legende]}
+\lfoot{\sffamily\small [logoetalab]}
+\cfoot{\sffamily\small - \thepage{} -}
+\rfoot{\hyperlink{matoc}{\small\faArrowAltCircleUp[regular]}}
+\usepackage{hologo}
+\providecommand\tikzlogo{Ti\textit{k}Z}
+\providecommand\TeXLive{\TeX{}Live\xspace}
+\providecommand\PSTricks{\textsf{PSTricks}\xspace}
+\let\pstricks\PSTricks
+\let\TikZ\tikzlogo
+
+\usepackage{hyperref}
+\urlstyle{same}
+\hypersetup{pdfborder=0 0 0}
+\usepackage[margin=2cm]{geometry}
+\setlength{\parindent}{0pt}
+
+\def\TPversion{0.1.0}
+\def\TPdate{17 août 2023}
+\def\HtRet{0.45}\def\LgRect{1.5}
+\usepackage{tcolorbox}
+
+\def\ListeTailleTexte{tiny,scriptsize,footnotesize,small,normalsize,large,large,LARGE,huge,Huge}
+
+\sethlcolor{lightgray!25}
+\NewDocumentCommand\MontreCode{ m }{%
+	\hl{\vphantom{\texttt{pf}}\texttt{#1}}%
+}
+
+\usepackage{babel}
+
+\begin{document}
+
+\pagestyle{fancy}
+
+\thispagestyle{empty}
+
+\begin{center}
+	\begin{minipage}{0.75\linewidth}
+	\begin{tcolorbox}[colframe=yellow,colback=yellow!15]
+		\begin{center}
+			\begin{tabular}{c}
+				{\Huge \texttt{etalab}}\\
+				\\
+				{\LARGE Logo de la licence \og Licence Ouverte Etalab 2.0 \fg.} \\
+				\\
+				\url{https://www.etalab.gouv.fr/licence-ouverte-open-licence/} \\
+				\\
+				{\small \texttt{Version \TPversion{} -- \TPdate}}
+		\end{tabular}
+		\end{center}
+	\end{tcolorbox}
+\end{minipage}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{c}
+	\texttt{Cédric Pierquet}\\
+	{\ttfamily c pierquet -- at -- outlook . fr}\\
+	\texttt{\url{https://github.com/cpierquet/logoetalab}}
+\end{tabular}
+\end{center}
+
+\hrule
+
+\phantomsection
+
+\hypertarget{matoc}{}
+
+\tableofcontents
+
+\vspace*{5mm}
+
+\hrule
+
+\vspace*{5mm}
+
+\vfill
+
+\hfill
+{\Huge\sffamily\affloetalab[Legende]}
+\hfill~
+
+\bigskip
+
+\hfill
+{\Huge\loetalab*[Couleur=Bleu,Legende,TexteLegende={Licence Ouverte}]}
+\hfill~
+
+\vspace*{1cm}
+
+\hfill
+{\LARGE\loetalab~\loetalab[Couleur=Bleu]~\loetalab[Couleur=Gris]~\loetalab[Couleur=Marron]~\loetalab[Couleur=Rouge]~\loetalab[Couleur=Vert]~\loetalab[Couleur=Violet]}
+\hfill~
+
+\vspace*{1cm}
+
+\hfill
+{\LARGE\loetalab*~\loetalab*[Couleur=Bleu]~\loetalab*[Couleur=Gris]~\loetalab*[Couleur=Marron]~\loetalab*[Couleur=Rouge]~\loetalab*[Couleur=Vert]~\loetalab*[Couleur=Violet]}
+\hfill~
+
+\vfill~
+
+\pagebreak
+
+\section{Le package logoetalab}
+
+\subsection{Idées}
+
+L'idée est de pouvoir intégrer, dans un document \LaTeX, un logo relatif à la licence \og Licence Ouverte Etalab 2.0 \fg{} (\url{https://www.etalab.gouv.fr/licence-ouverte-open-licence/}).
+
+\medskip
+
+\hfill
+\begin{tblr}{width=15cm,colspec={|[1pt]X[j]},cells={font=\footnotesize}}
+	La « Licence Ouverte / Open License » présente les caractéristiques suivantes :\\
+	1. Une grande liberté de réutilisation des informations :\\
+	-- Une licence ouverte, libre et gratuite, qui apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques ;\\
+	-- Une licence qui promeut la réutilisation la plus large en autorisant la reproduction, la redistribution, l’adaptation et l’exploitation commerciale des données ;\\
+	-- Une licence qui s’inscrit dans un contexte international en étant compatible avec les standards des licences Open Data développées à l’étranger et notamment celles du gouvernement britannique (Open Government Licence) ainsi que les autres standards internationaux (ODC-BY, CC-BY 2.0).\\
+	2. Une exigence forte de transparence de la donnée et de qualité des sources en rendant obligatoire la mention de la paternité.\\
+	3. Une opportunité de mutualisation pour les autres données publiques en mettant en place un standard réutilisable par les collectivités territoriales qui souhaiteraient se lancer dans l’ouverture des données publiques.\\
+\end{tblr}
+\hfill~
+
+\medskip
+
+Les logos sont au format (vectoriel) \MontreCode{pdf}, et ont été obtenus à partir d'un fichier fichier \MontreCode{svg} sous licence CC BY 2.0 FR (\href{https://fr.m.wikipedia.org/wiki/Fichier:Logo-licence-ouverte2.svg}{[lien]}).
+
+\subsection{Chargement}
+
+Le package se charge dans le préambule, via \MontreCode{\textbackslash usepackage\{logoetalab\}}.
+
+Les seuls packages chargés sont \MontreCode{graphicx}, \MontreCode{calc} et \MontreCode{simplekv}.
+
+\begin{codehigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10]
+\documentclass{article}
+...
+\usepackage{logoetalab}
+...
+\end{codehigh}
+
+\subsection{Utilisation}
+
+Le package propose deux commandes :
+
+\medskip
+
+\begin{itemize}
+	\item \MontreCode{\textbackslash loetalab} pour un affichage du logo en mode \textit{en ligne} (raccourci de \texttt{LicenceOuverteEtalab}) ;
+	\item \MontreCode{\textbackslash affloetalab} pour un affichage \textit{autonome} (raccourci de \texttt{AfficheLicenceOuverteEtalab}).
+\end{itemize}
+
+\medskip
+
+\begin{codehigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10]
+\loetalab(*)[Options]
+
+\affloetalab(*)[Options]
+\end{codehigh}
+
+La différence entre les deux se situe au niveau de la taille et de l'alignement vertical du logo.
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalab{} / \loetalab* / \affloetalab{} / \affloetalab*
+\end{demohigh}
+
+\pagebreak
+
+\section{Les commandes}
+
+\subsection{Affichage en mode \textit{en ligne}}
+
+La commande dédiée à un affichage \textit{en ligne} est \MontreCode{\textbackslash loetalab}.
+
+\medskip
+
+\begin{itemize}[leftmargin=*]
+	\item La version étoilée force l'affichage du logo en format paysage.
+	\item L'argument optionnel, et entre \MontreCode{[...]} propose les clés suivantes :
+	\begin{itemize}
+		\item la clé \MontreCode{Couleur} pour choisir une couleur, parmi \MontreCode{Noir/Bleu/Gris/Marron/Rouge/Vert/Violet}, et vaut \MontreCode{Noir} par défaut ;
+		
+		\hfill{\footnotesize si une couleur non existante est choisie, c'est \MontreCode{Noir} qui sera utilisée}
+		\item le booléen \MontreCode{Legende} pour afficher une légende à côté du logo, qui vaut \MontreCode{false} par défaut ;
+		\item la clé \MontreCode{TexteLegende} pour paramétrer le texte de la légende et qui vaut \MontreCode{Publié sous licence Etalab 2.0} par défaut.
+	\end{itemize}
+\end{itemize}
+
+\medskip
+
+La hauteur du logo est calculée (et fixée) en fonction :
+
+\begin{itemize}
+	\item de 90\,\% de la hauteur globale, \underline{dans la police courante}, de la boîte formée des lettres \fbox{qB} ;
+	\item décalée vers le bas d'un peu moins que la profondeur, \underline{dans la police courante}, de la boîte formée de la lettre \fbox{q}.
+\end{itemize}
+
+\medskip
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\foreach \Taille in \ListeTailleTexte
+{%
+    \csname\Taille\endcsname\texttt{\Taille} : Essai de logo \loetalab{} en ligne.\par
+}
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\foreach \Taille in \ListeTailleTexte
+{%
+	\csname\Taille\endcsname\texttt{\Taille} : {\sffamily Essai de logo \loetalab*{} en ligne.}\par
+}
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+{\small\sffamily Publication sous \loetalab*[Couleur=Rouge,Legende, TexteLegende={Licence Etalab 2.0}].}\par
+{\LARGE\sffamily Publication sous \loetalab[Couleur=Vert,Legende, TexteLegende={Licence Etalab 2.0}].}\par
+\end{demohigh}
+
+\subsection{Affichage en mode \textit{autonome}}
+
+La commande dédiée à un affichage \textit{autonome} est \MontreCode{\textbackslash affloetalab}.
+
+\medskip
+
+\begin{itemize}[leftmargin=*]
+	\item La version étoilée force l'affichage du logo en format paysage.
+	\item L'argument optionnel, et entre \MontreCode{[...]} propose les clés suivantes :
+	\begin{itemize}
+		\item la clé \MontreCode{Couleur} pour choisir une couleur, parmi \MontreCode{Noir/Bleu/Gris/Marron/Rouge/Vert/Violet}, et vaut \MontreCode{Noir} par défaut ;
+		
+		\hfill{\footnotesize si une couleur non existante est choisie, c'est \MontreCode{Noir} qui sera utilisée}
+		\item le booléen \MontreCode{Legende} pour afficher une légende à côté du logo, qui vaut \MontreCode{false} par défaut ;
+		\item la clé \MontreCode{TexteLegende} pour paramétrer le texte de la légende et qui vaut \MontreCode{Publié sous licence Etalab 2.0} par défaut.
+	\end{itemize}
+\end{itemize}
+
+\medskip
+
+La hauteur du logo est calculée (et fixée) en fonction :
+
+\begin{itemize}
+	\item du double de la hauteur globale, \underline{dans la police courante}, de la boîte formée de la lettre \fbox{B} ;
+	\item décalée vers le bas de la moitié de la hauteur, \underline{dans la police courante}, de la boîte \fbox{B}.
+\end{itemize}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\foreach \Taille in \ListeTailleTexte
+{%
+	\csname\Taille\endcsname\texttt{\Taille} : \affloetalab{} en mode autonome.\par
+}
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\foreach \Taille in \ListeTailleTexte
+{%
+	\csname\Taille\endcsname\texttt{\Taille} : \affloetalab*{} en mode autonome.\par
+}
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+	\foreach \Taille in \ListeTailleTexte
+	{%
+		\csname\Taille\endcsname\texttt{\Taille} : \affloetalab*[Couleur=Violet] en mode autonome.\par
+	}
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+{\small\sffamily \affloetalab[Couleur=Rouge,Legende].}\par
+{\LARGE\sffamily \affloetalab[Couleur=Vert,Legende,TexteLegende={Licence Etalab 2.0}].}\par
+\end{demohigh}
+
+\vfill
+
+\section{Historique}
+
+\verb|v0.1.0|~:~~~~Version initiale
+
+\vspace*{15mm}
+
+\pagebreak
+
+\end{document}

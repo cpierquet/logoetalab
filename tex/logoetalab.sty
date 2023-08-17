@@ -1,0 +1,86 @@
+% Author        : C. Pierquet
+% licence       : Released under the LaTeX Project Public License v1.3c or later, see http://www.latex-project.org/lppl.txtf
+% licence svg   : CC BY 2.0 FR
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{logoetalab}[2023/08/17 0.1.0 Logo vectoriel de la licence 'Licence Ouverte Etalab 2.0']
+
+%====HISTORIQUE
+% v 0.1.0	Version initiale
+
+%====BASE
+\RequirePackage{graphicx}
+\RequirePackage{calc}
+\RequirePackage{simplekv}
+
+%====DIMENSIONS
+\newlength{\tmp@logo@hauteur@totale}
+\newlength{\tmp@logo@profondeur}
+
+%====CLÉS
+\defKV[iconetalab]{%
+	Couleur=\def\tmplogocouleur{#1},%
+	TexteLegende=\def\tmplogotextleg{#1}
+}
+
+\setKVdefault[iconetalab]{%
+	Couleur=Noir,%
+	Legende=false,%
+	TexteLegende={Publié sous licence Etalab 2.0}
+}
+
+%====COMMANDES
+\NewDocumentCommand\loetalab{ s O{} }{%
+	\useKVdefault[iconetalab]%
+	\setKV[iconetalab]{#2}%
+	\settototalheight{\tmp@logo@hauteur@totale}{\hbox{qB}}%
+	\settodepth{\tmp@logo@profondeur}{\hbox{q}}%
+	\IfBooleanTF{#1}%
+		{%
+			\IfFileExists{LogoLicenceOuverte-\tmplogocouleur-H.pdf}%
+				{%
+					\raisebox{-\tmp@logo@profondeur+0.05\tmp@logo@hauteur@totale}{\includegraphics[height=0.9\tmp@logo@hauteur@totale]{LogoLicenceOuverte-\tmplogocouleur-H.pdf}}%
+				}%
+				{%
+					\raisebox{-\tmp@logo@profondeur+0.05\tmp@logo@hauteur@totale}{\includegraphics[height=0.9\tmp@logo@hauteur@totale]{LogoLicenceOuverte-Noir-H.pdf}}%
+				}%
+		}%
+		{%
+			\IfFileExists{LogoLicenceOuverte-\tmplogocouleur-V.pdf}%
+				{%
+					\raisebox{-\tmp@logo@profondeur+0.05\tmp@logo@hauteur@totale}{\includegraphics[height=0.9\tmp@logo@hauteur@totale]{LogoLicenceOuverte-\tmplogocouleur-V.pdf}}%
+				}%
+				{%
+					\raisebox{-\tmp@logo@profondeur+0.05\tmp@logo@hauteur@totale}{\includegraphics[height=0.9\tmp@logo@hauteur@totale]{LogoLicenceOuverte-Noir-V.pdf}}%
+				}%
+		}%
+	\ifboolKV[iconetalab]{Legende}{~\tmplogotextleg}{}%
+}
+
+\NewDocumentCommand\affloetalab{ s O{} }{%
+	\useKVdefault[iconetalab]%
+	\setKV[iconetalab]{#2}%
+	\settototalheight{\tmp@logo@hauteur@totale}{\hbox{B}}%
+	\IfBooleanTF{#1}%
+		{%
+			\IfFileExists{LogoLicenceOuverte-\tmplogocouleur-H.pdf}%
+				{%
+					\raisebox{-0.5\tmp@logo@hauteur@totale}{\includegraphics[height=2\tmp@logo@hauteur@totale]{LogoLicenceOuverte-\tmplogocouleur-H.pdf}}%
+				}%
+				{%
+					\raisebox{-0.5\tmp@logo@hauteur@totale}{\includegraphics[height=2\tmp@logo@hauteur@totale]{LogoLicenceOuverte-Noir-H.pdf}}%
+				}%
+		}%
+		{%
+			\IfFileExists{LogoLicenceOuverte-\tmplogocouleur-V.pdf}%
+				{%
+					\raisebox{-0.5\tmp@logo@hauteur@totale}{\includegraphics[height=2\tmp@logo@hauteur@totale]{LogoLicenceOuverte-\tmplogocouleur-V.pdf}}%
+				}%
+				{%
+					\raisebox{-0.5\tmp@logo@hauteur@totale}{\includegraphics[height=2\tmp@logo@hauteur@totale]{LogoLicenceOuverte-Noir-V.pdf}}%
+				}%
+		}%
+	\ifboolKV[iconetalab]{Legende}{~\tmplogotextleg}{}%
+}
+
+\endinput
