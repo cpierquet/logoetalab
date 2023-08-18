@@ -58,13 +58,13 @@
 \thispagestyle{empty}
 
 \begin{center}
-	\begin{minipage}{0.75\linewidth}
+	\begin{minipage}{0.88\linewidth}
 	\begin{tcolorbox}[colframe=yellow,colback=yellow!15]
 		\begin{center}
 			\begin{tabular}{c}
-				{\Huge \texttt{etalab}}\\
+				{\Huge \texttt{logoetalab}}\\
 				\\
-				{\LARGE Logo de la licence \og Licence Ouverte Etalab 2.0 \fg.} \\
+				{\LARGE Logo de la licence \og Licence Ouverte Etalab 2.0 \fg} \\
 				\\
 				\url{https://www.etalab.gouv.fr/licence-ouverte-open-licence/} \\
 				\\
@@ -99,6 +99,7 @@
 
 \vfill
 
+\begin{tcolorbox}[colframe=lightgray,colback=lightgray!10]
 \hfill
 {\Huge\sffamily\affloetalab[Legende]}
 \hfill~
@@ -120,6 +121,11 @@
 \hfill
 {\LARGE\loetalab*~\loetalab*[Couleur=Bleu]~\loetalab*[Couleur=Gris]~\loetalab*[Couleur=Marron]~\loetalab*[Couleur=Rouge]~\loetalab*[Couleur=Vert]~\loetalab*[Couleur=Violet]}
 \hfill~
+
+\vspace*{1cm}
+
+{\scriptsize\sffamily\affloetalab[Legende]}\hfill{\tiny\sffamily\affloetalab*[Couleur=Violet,Legende,TexteLegende={Licence Ouverte}]}
+\end{tcolorbox}
 
 \vfill~
 
@@ -156,11 +162,17 @@ Le package se charge dans le préambule, via \MontreCode{\textbackslash usepacka
 Les seuls packages chargés sont \MontreCode{graphicx}, \MontreCode{calc} et \MontreCode{simplekv}.
 
 \begin{codehigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10]
-\documentclass{article}
-...
 \usepackage{logoetalab}
-...
 \end{codehigh}
+
+\subsection{Masque de nommage des fichiers}
+
+Chaque logo est nommé sous la forme \MontreCode{LogoLicenceOuverte-<Couleur>-<Orientation>.pdf}, de sorte que les logos peuvent être insérés directement via la commande \MontreCode{\textbackslash includegraphics} \textit{classique}.
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\includegraphics[height=5cm]{LogoLicenceOuverte-Gris-V.pdf}\par
+\includegraphics[width=4cm]{LogoLicenceOuverte-Rouge-H.pdf}
+\end{demohigh}
 
 \subsection{Utilisation}
 
@@ -169,25 +181,38 @@ Le package propose deux commandes :
 \medskip
 
 \begin{itemize}
-	\item \MontreCode{\textbackslash loetalab} pour un affichage du logo en mode \textit{en ligne} (raccourci de \texttt{LicenceOuverteEtalab}) ;
-	\item \MontreCode{\textbackslash affloetalab} pour un affichage \textit{autonome} (raccourci de \texttt{AfficheLicenceOuverteEtalab}).
+	\item \MontreCode{\textbackslash loetalab} pour un affichage du logo en mode \textit{en ligne} (raccourci de \textsc{\textbf{L}icence\textbf{O}uverte\textbf{Etalab}}) ;
+	\item \MontreCode{\textbackslash affloetalab} pour un affichage \textit{autonome} (raccourci de \textsc{\textbf{Aff}iche\textbf{L}icence\textbf{O}uverte\textbf{Etalab}}).
 \end{itemize}
 
 \medskip
 
 \begin{codehigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10]
 \loetalab(*)[Options]
-
 \affloetalab(*)[Options]
 \end{codehigh}
 
 La différence entre les deux se situe au niveau de la taille et de l'alignement vertical du logo.
 
 \begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-\loetalab{} / \loetalab* / \affloetalab{} / \affloetalab*
+\loetalab
 \end{demohigh}
 
-\pagebreak
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalab*
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\affloetalab
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\affloetalab*
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalab\loetalab*\affloetalab\affloetalab*
+\end{demohigh}
 
 \section{Les commandes}
 
@@ -214,29 +239,48 @@ La commande dédiée à un affichage \textit{en ligne} est \MontreCode{\textback
 La hauteur du logo est calculée (et fixée) en fonction :
 
 \begin{itemize}
-	\item de 90\,\% de la hauteur globale, \underline{dans la police courante}, de la boîte formée des lettres \fbox{qB} ;
-	\item décalée vers le bas d'un peu moins que la profondeur, \underline{dans la police courante}, de la boîte formée de la lettre \fbox{q}.
+	\item de 90\,\% de la hauteur globale, \underline{dans la police courante}, des lettres \fbox{qB} ;
+	\item décalée vers le bas d'un peu moins que la profondeur, \underline{dans la police courante}, de la lettre \fbox{q}.
 \end{itemize}
 
 \medskip
 
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\loetalab} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny Essai de logo \loetalab{} en ligne} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize Essai de logo \loetalab{} en ligne} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize Essai de logo \loetalab{} en ligne} \\
+	{\small\fakeverb{\small}} & {\small Essai de logo \loetalab{} en ligne} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize Essai de logo \loetalab{} en ligne} \\
+	{\large\fakeverb{\large}} & {\large Essai de logo \loetalab{} en ligne} \\
+	{\Large\fakeverb{\Large}} & {\Large Essai de logo \loetalab{} en ligne} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE Essai de logo \loetalab{} en ligne} \\
+	{\huge\fakeverb{\huge}} & {\huge Essai de logo \loetalab{} en ligne} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge Essai de logo \loetalab{} en ligne} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\loetalab*} & \\
+	{\tiny\fakeverb{\tiny\sffamily}} & {\tiny\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\scriptsize\fakeverb{\scriptsize\sffamily}} & {\scriptsize\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\footnotesize\fakeverb{\footnotesize\sffamily}} & {\footnotesize\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\small\fakeverb{\small\sffamily}} & {\small\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\normalsize\fakeverb{\normalsize\sffamily}} & {\normalsize\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\large\fakeverb{\large\sffamily}} & {\large\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\Large\fakeverb{\Large\sffamily}} & {\Large\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\LARGE\fakeverb{\LARGE\sffamily}} & {\LARGE\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\huge\fakeverb{\huge\sffamily}} & {\huge\sffamily Essai de logo \loetalab*{} en ligne} \\
+	{\Huge\fakeverb{\Huge\sffamily}} & {\Huge\sffamily Essai de logo \loetalab*{} en ligne} \\
+\end{tblr}
+
 \begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-\foreach \Taille in \ListeTailleTexte
-{%
-    \csname\Taille\endcsname\texttt{\Taille} : Essai de logo \loetalab{} en ligne.\par
-}
+\small Publication sous \loetalab*[Couleur=Rouge,Legende, TexteLegende={Licence Etalab 2.0}]
 \end{demohigh}
 
 \begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-\foreach \Taille in \ListeTailleTexte
-{%
-	\csname\Taille\endcsname\texttt{\Taille} : {\sffamily Essai de logo \loetalab*{} en ligne.}\par
-}
-\end{demohigh}
-
-\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-{\small\sffamily Publication sous \loetalab*[Couleur=Rouge,Legende, TexteLegende={Licence Etalab 2.0}].}\par
-{\LARGE\sffamily Publication sous \loetalab[Couleur=Vert,Legende, TexteLegende={Licence Etalab 2.0}].}\par
+\LARGE\sffamily Publication sous \loetalab[Couleur=Vert,Legende, TexteLegende={Licence Etalab 2.0}]
 \end{demohigh}
 
 \subsection{Affichage en mode \textit{autonome}}
@@ -266,30 +310,58 @@ La hauteur du logo est calculée (et fixée) en fonction :
 	\item décalée vers le bas de la moitié de la hauteur, \underline{dans la police courante}, de la boîte \fbox{B}.
 \end{itemize}
 
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalab} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalab{} en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalab{} en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalab{} en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalab{} en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalab{} en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalab{} en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalab{} en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalab{} en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalab{} en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalab{} en mode autonome} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalab*} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalab*{} en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalab*{} en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalab*{} en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalab*{} en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalab*{} en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalab*{} en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalab*{} en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalab*{} en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalab*{} en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalab*{} en mode autonome} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalab*[Couleur=Violet]} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalab*[Couleur=Violet] en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalab*[Couleur=Violet] en mode autonome} \\
+\end{tblr}
+
 \begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-\foreach \Taille in \ListeTailleTexte
-{%
-	\csname\Taille\endcsname\texttt{\Taille} : \affloetalab{} en mode autonome.\par
-}
+\small\affloetalab[Couleur=Rouge,Legende]
 \end{demohigh}
 
 \begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-\foreach \Taille in \ListeTailleTexte
-{%
-	\csname\Taille\endcsname\texttt{\Taille} : \affloetalab*{} en mode autonome.\par
-}
-\end{demohigh}
-
-\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-	\foreach \Taille in \ListeTailleTexte
-	{%
-		\csname\Taille\endcsname\texttt{\Taille} : \affloetalab*[Couleur=Violet] en mode autonome.\par
-	}
-\end{demohigh}
-
-\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
-{\small\sffamily \affloetalab[Couleur=Rouge,Legende].}\par
-{\LARGE\sffamily \affloetalab[Couleur=Vert,Legende,TexteLegende={Licence Etalab 2.0}].}\par
+\LARGE\sffamily\affloetalab[Couleur=Vert,Legende,TexteLegende={Licence Etalab 2.0}]
 \end{demohigh}
 
 \vfill
