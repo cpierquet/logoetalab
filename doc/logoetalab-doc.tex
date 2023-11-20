@@ -1,6 +1,6 @@
 % !TeX TXS-program:compile = txs:///arara
-% arara: pdflatex: {shell: yes, synctex: no, interaction: batchmode}
-% arara: pdflatex: {shell: yes, synctex: no, interaction: batchmode} if found('log', '(undefined references|Please rerun|Rerun to get)')
+% arara: pdflatex: {shell: no, synctex: no, interaction: batchmode}
+% arara: pdflatex: {shell: no, synctex: no, interaction: batchmode} if found('log', '(undefined references|Please rerun|Rerun to get)')
 
 \documentclass[french,11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -37,8 +37,8 @@
 \usepackage[margin=2cm]{geometry}
 \setlength{\parindent}{0pt}
 
-\def\TPversion{0.1.0}
-\def\TPdate{17 août 2023}
+\def\TPversion{0.1.1}
+\def\TPdate{19 novembre 2023}
 \def\HtRet{0.45}\def\LgRect{1.5}
 \usepackage{tcolorbox}
 
@@ -155,6 +155,10 @@ L'idée est de pouvoir intégrer, dans un document \LaTeX, un logo relatif à la
 
 Les logos sont au format (vectoriel) \MontreCode{pdf}, et ont été obtenus à partir d'un fichier fichier \MontreCode{svg} sous licence CC BY 2.0 FR (\href{https://fr.m.wikipedia.org/wiki/Fichier:Logo-licence-ouverte2.svg}{[lien]}).
 
+\smallskip
+
+\texttt{(màj 0.1.1)} Une version \TikZ{} des logos est également disponible, ce qui permet d'utiliser des couleurs personnalisés.
+
 \subsection{Chargement}
 
 Le package se charge dans le préambule, via \MontreCode{\textbackslash usepackage\{logoetalab\}}.
@@ -165,9 +169,9 @@ Les seuls packages chargés sont \MontreCode{graphicx}, \MontreCode{calc} et \Mo
 \usepackage{logoetalab}
 \end{codehigh}
 
-\subsection{Masque de nommage des fichiers}
+\subsection{Masque de nommage des fichiers pdf}
 
-Chaque logo est nommé sous la forme \MontreCode{LogoLicenceOuverte-<Couleur>-<Orientation>.pdf}, de sorte que les logos peuvent être insérés directement via la commande \MontreCode{\textbackslash includegraphics} \textit{classique}.
+Chaque logo (pdf) est nommé sous la forme \MontreCode{LogoLicenceOuverte-<Couleur>-<Orientation>.pdf}, de sorte que les logos peuvent être insérés directement via la commande \MontreCode{\textbackslash includegraphics} \textit{classique}.
 
 \begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
 \includegraphics[height=5cm]{LogoLicenceOuverte-Gris-V.pdf}\par
@@ -176,20 +180,27 @@ Chaque logo est nommé sous la forme \MontreCode{LogoLicenceOuverte-<Couleur>-<O
 
 \subsection{Utilisation}
 
-Le package propose deux commandes :
+Le package propose deux commandes (et deux versions) :
 
 \medskip
 
 \begin{itemize}
 	\item \MontreCode{\textbackslash loetalab} pour un affichage du logo en mode \textit{en ligne} (raccourci de \textsc{\textbf{L}icence\textbf{O}uverte\textbf{Etalab}}) ;
-	\item \MontreCode{\textbackslash affloetalab} pour un affichage \textit{autonome} (raccourci de \textsc{\textbf{Aff}iche\textbf{L}icence\textbf{O}uverte\textbf{Etalab}}).
+	\item \MontreCode{\textbackslash affloetalab} pour un affichage \textit{autonome} (raccourci de \textsc{\textbf{Aff}iche\textbf{L}icence\textbf{O}uverte\textbf{Etalab}}) ;
+	\item \MontreCode{\textbackslash loetalabtkz} pour un affichage du logo, version \TikZ, en mode \textit{en ligne} ;
+	\item \MontreCode{\textbackslash affloetalabtkz} pour un affichage \textit{autonome}, version \TikZ.
 \end{itemize}
 
 \medskip
 
 \begin{codehigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10]
+%version pdf
 \loetalab(*)[Options]
 \affloetalab(*)[Options]
+
+%version tikz
+\loetalabtkz(*)[Options]
+\affloetalabtkz(*)[Options]
 \end{codehigh}
 
 La différence entre les deux se situe au niveau de la taille et de l'alignement vertical du logo.
@@ -214,7 +225,29 @@ La différence entre les deux se situe au niveau de la taille et de l'alignement
 \loetalab\loetalab*\affloetalab\affloetalab*
 \end{demohigh}
 
-\section{Les commandes}
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalabtkz
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalabtkz*
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\affloetalabtkz
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\affloetalabtkz*
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex3,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+\loetalabtkz\loetalabtkz*\affloetalabtkz\affloetalabtkz*
+\end{demohigh}
+
+\pagebreak
+
+\section{Les commandes en mode pdf}
 
 \subsection{Affichage en mode \textit{en ligne}}
 
@@ -223,7 +256,7 @@ La commande dédiée à un affichage \textit{en ligne} est \MontreCode{\textback
 \medskip
 
 \begin{itemize}[leftmargin=*]
-	\item La version étoilée force l'affichage du logo en format paysage.
+	\item La version étoilée force l'affichage du logo en format \textit{paysage}.
 	\item L'argument optionnel, et entre \MontreCode{[...]} propose les clés suivantes :
 	\begin{itemize}
 		\item la clé \MontreCode{Couleur} pour choisir une couleur, parmi \MontreCode{Noir/Bleu/Gris/Marron/Rouge/Vert/Violet}, et vaut \MontreCode{Noir} par défaut ;
@@ -236,7 +269,7 @@ La commande dédiée à un affichage \textit{en ligne} est \MontreCode{\textback
 
 \medskip
 
-La hauteur du logo est calculée (et fixée) en fonction :
+La hauteur (auto) du logo est calculée (et fixée) en fonction :
 
 \begin{itemize}
 	\item de 90\,\% de la hauteur globale, \underline{dans la police courante}, des lettres \fbox{qB} ;
@@ -364,11 +397,161 @@ La hauteur du logo est calculée (et fixée) en fonction :
 \LARGE\sffamily\affloetalab[Couleur=Vert,Legende,TexteLegende={Licence Etalab 2.0}]
 \end{demohigh}
 
+\pagebreak
+
+\section{Les commandes en mode TikZ}
+
+\subsection{Affichage en mode \textit{en ligne}}
+
+La commande dédiée à un affichage \textit{en ligne} est \MontreCode{\textbackslash loetalabtkz}.
+
+\medskip
+
+\begin{itemize}[leftmargin=*]
+	\item La version étoilée force l'affichage du logo en format \textit{paysage}.
+	\item L'argument optionnel, et entre \MontreCode{[...]} propose les clés suivantes :
+	\begin{itemize}
+		\item la clé \MontreCode{Couleur} pour choisir une couleur, et vaut \MontreCode{black} par défaut ;
+		\item la clé \MontreCode{Hauteur} pour la hauteur du logo, qui vaut \MontreCode{auto} par défaut ;
+		\item la clé \MontreCode{DecalageV} pour paramétrer le décalage vertical du logo, qui vaut \MontreCode{auto} par défaut.
+	\end{itemize}
+\end{itemize}
+
+\medskip
+
+La hauteur (auto) du logo est calculée (et fixée) en fonction :
+
+\begin{itemize}
+	\item de 90\,\% de la hauteur globale, \underline{dans la police courante}, des lettres \fbox{qB} ;
+	\item décalée vers le bas d'un peu moins que la profondeur, \underline{dans la police courante}, de la lettre \fbox{q}.
+\end{itemize}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\loetalabtkz} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny Essai de logo \loetalabtkz{} en ligne} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize Essai de logo \loetalabtkz{} en ligne} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize Essai de logo \loetalabtkz{} en ligne} \\
+	{\small\fakeverb{\small}} & {\small Essai de logo \loetalabtkz{} en ligne} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize Essai de logo \loetalabtkz{} en ligne} \\
+	{\large\fakeverb{\large}} & {\large Essai de logo \loetalabtkz{} en ligne} \\
+	{\Large\fakeverb{\Large}} & {\Large Essai de logo \loetalabtkz{} en ligne} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE Essai de logo \loetalabtkz{} en ligne} \\
+	{\huge\fakeverb{\huge}} & {\huge Essai de logo \loetalabtkz{} en ligne} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge Essai de logo \loetalabtkz{} en ligne} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\loetalab*} & \\
+	{\tiny\fakeverb{\tiny\sffamily}} & {\tiny\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\scriptsize\fakeverb{\scriptsize\sffamily}} & {\scriptsize\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\footnotesize\fakeverb{\footnotesize\sffamily}} & {\footnotesize\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\small\fakeverb{\small\sffamily}} & {\small\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\normalsize\fakeverb{\normalsize\sffamily}} & {\normalsize\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\large\fakeverb{\large\sffamily}} & {\large\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\Large\fakeverb{\Large\sffamily}} & {\Large\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\LARGE\fakeverb{\LARGE\sffamily}} & {\LARGE\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\huge\fakeverb{\huge\sffamily}} & {\huge\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+	{\Huge\fakeverb{\Huge\sffamily}} & {\Huge\sffamily Essai de logo \loetalabtkz*{} en ligne} \\
+\end{tblr}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+	\small Publication sous \loetalabtkz*[Couleur=teal]~Licence Etalab 2.0
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+	\LARGE\sffamily Publication sous \loetalabtkz[Couleur=lime]~Licence Etalab 2.0
+\end{demohigh}
+
+\subsection{Affichage en mode \textit{autonome}}
+
+La commande dédiée à un affichage \textit{autonome} est \MontreCode{\textbackslash affloetalabtkz}.
+
+\medskip
+
+\begin{itemize}[leftmargin=*]
+	\item La version étoilée force l'affichage du logo en format paysage.
+	\item L'argument optionnel, et entre \MontreCode{[...]} propose les clés suivantes :
+	\begin{itemize}
+		\item la clé \MontreCode{Couleur} pour choisir une couleur, et vaut \MontreCode{Noir} par défaut ;
+		\item la clé \MontreCode{Hauteur} pour la hauteur du logo, qui vaut \MontreCode{auto} par défaut ;
+		\item la clé \MontreCode{DecalageV} pour paramétrer le décalage vertical du logo, qui vaut \MontreCode{auto} par défaut.
+	\end{itemize}
+\end{itemize}
+
+\medskip
+
+La hauteur du logo est calculée (et fixée) en fonction :
+
+\begin{itemize}
+	\item du double de la hauteur globale, \underline{dans la police courante}, de la boîte formée de la lettre \fbox{B} ;
+	\item décalée vers le bas de la moitié de la hauteur, \underline{dans la police courante}, de la boîte \fbox{B}.
+\end{itemize}
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalabtkz} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalabtkz{} en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalabtkz{} en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalabtkz{} en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalabtkz{} en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalabtkz{} en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalabtkz{} en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalabtkz{} en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalabtkz{} en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalabtkz{} en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalabtkz{} en mode autonome} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalabtkz*} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalabtkz*{} en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalabtkz*{} en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalabtkz*{} en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalabtkz*{} en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalabtkz*{} en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalabtkz*{} en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalabtkz*{} en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalabtkz*{} en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalabtkz*{} en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalabtkz*{} en mode autonome} \\
+\end{tblr}
+
+\medskip
+
+\begin{tblr}{hlines,width=\linewidth,colspec={Q[l,m]X[l,m]},row{1}={magenta!10},row{2-Z}={cyan!10}}
+	\SetCell[r=1,c=2]{c,m} \fakeverb{\affloetalabtkz*[Couleur=gray]} & \\
+	{\tiny\fakeverb{\tiny}} & {\tiny \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\scriptsize\fakeverb{\scriptsize}} & {\scriptsize \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\footnotesize\fakeverb{\footnotesize}} & {\footnotesize \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\small\fakeverb{\small}} & {\small \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\normalsize\fakeverb{\normalsize}} & {\normalsize \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\large\fakeverb{\large}} & {\large \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\Large\fakeverb{\Large}} & {\Large \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\LARGE\fakeverb{\LARGE}} & {\LARGE \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\huge\fakeverb{\huge}} & {\huge \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+	{\Huge\fakeverb{\Huge}} & {\Huge \affloetalabtkz*[Couleur=gray] en mode autonome} \\
+\end{tblr}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+	\small\affloetalabtkz[Couleur=magenta]
+\end{demohigh}
+
+\begin{demohigh}[language=latex/latex2,style/main=cyan!10,style/code=cyan!10,style/demo=cyan!10]
+	\LARGE\sffamily\affloetalabtkz[Couleur=teal]~Licence Etalab 2.0
+\end{demohigh}
+
 \vfill
 
 \section{Historique}
 
-\verb|v0.1.0|~:~~~~Version initiale
+\verb|v0.1.1|~:~~~~Ajout d'une version \TikZ.
+
+\verb|v0.1.0|~:~~~~Version initiale.
 
 \vspace*{15mm}
 
